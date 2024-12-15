@@ -1,0 +1,60 @@
+<div class="hero min-h-screen bg-pink-100">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left">
+      <h1 class="text-5xl font-bold text-pink-600">Welcome Back to Yummy!</h1>
+      <p class="py-6 text-pink-800">
+        Indulge in our irresistible cakes once again. Sign in to place your
+        order and make your day even sweeter with Yummy!
+      </p>
+    </div>
+    <div class="card w-full max-w-sm shrink-0 shadow-2xl bg-white">
+      <form class="card-body">
+        <!-- Email -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text text-pink-800">Email</span>
+          </label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            class="input input-bordered bg-white text-black border-pink-400"
+            required
+          />
+        </div>
+        <!-- Password -->
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text text-pink-800">Password</span>
+          </label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            class="input input-bordered bg-white text-black border-pink-400"
+            required
+          />
+          <label class="label">
+            <a href="#" class="label-text-alt link link-hover text-pink-600"
+              >Forgot password?</a
+            >
+          </label>
+        </div>
+        <!-- Submit Button -->
+        <div class="form-control mt-6">
+          <button class="btn bg-pink-600 text-white hover:bg-pink-700">
+            Login
+          </button>
+        </div>
+        <!-- Link to Sign-Up -->
+        <p class="mt-4 text-center text-pink-800">
+          Don't have an account?
+          <a
+            routerLink="/auth/signup"
+            class="link link-hover text-pink-600 font-bold"
+          >
+            Sign Up
+          </a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
