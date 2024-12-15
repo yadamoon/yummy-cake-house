@@ -4,55 +4,64 @@
       "id": 1,
       "name": "Chocolate Cake",
       "description": "A rich and moist chocolate cake topped with silky ganache.",
-      "imageUrl": "https://via.placeholder.com/300x200"
+      "imageUrl": "https://via.placeholder.com/300x200",
+      "price": 29.99
     },
     {
       "id": 2,
       "name": "Vanilla Cake",
       "description": "A soft and fluffy vanilla cake with cream frosting.",
-      "imageUrl": "https://via.placeholder.com/300x200"
+      "imageUrl": "https://via.placeholder.com/300x200",
+        "price": 29.99
     },
     {
       "id": 3,
       "name": "Red Velvet Cake",
       "description": "A smooth red velvet cake with cream cheese frosting.",
-      "imageUrl": "https://via.placeholder.com/300x200"
+      "imageUrl": "https://via.placeholder.com/300x200",
+        "price": 29.99
     },
       {
       "id": 4,
       "name": "Dhocolate Cake",
       "description": "A rich and moist chocolate cake topped with silky ganache.",
-      "imageUrl": "https://via.placeholder.com/300x200"
+      "imageUrl": "https://via.placeholder.com/300x200",
+        "price": 29.99
     },
     {
       "id": 5,
       "name": "Banilla Cake",
       "description": "A soft and fluffy vanilla cake with cream frosting.",
-      "imageUrl": "https://via.placeholder.com/300x200"
+      "imageUrl": "https://via.placeholder.com/300x200",
+        "price": 29.99
     },
     {
       "id": 6,
       "name": "Aed Velvet Cake",
       "description": "A smooth red velvet cake with cream cheese frosting.",
-      "imageUrl": "https://via.placeholder.com/300x200"
+      "imageUrl": "https://via.placeholder.com/300x200",
+        "price": 29.99
     },
         {
       "id": 7,
       "name": "donat Cake",
       "description": "A rich and moist chocolate cake topped with silky ganache.",
-      "imageUrl": "https://via.placeholder.com/300x200"
+      "imageUrl": "https://via.placeholder.com/300x200",
+      "price": 29.99
     },
     {
       "id": 8,
       "name": "sanbusa Cake",
       "description": "A soft and fluffy vanilla cake with cream frosting.",
-      "imageUrl": "https://via.placeholder.com/300x200"
+      "imageUrl": "https://via.placeholder.com/300x200",
+      "price": 29.99
     },
     {
       "id": 9,
       "name": "test Velvet Cake",
       "description": "A smooth red velvet cake with cream cheese frosting.",
-      "imageUrl": "https://via.placeholder.com/300x200"
+      "imageUrl": "https://via.placeholder.com/300x200",
+      "price": 29.99
     }
 
     

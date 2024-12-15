@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Cake } from '../../model/cake.model';
 import { CakeService } from './../../service/cake.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { CartService } from '../../service/cart/cart.service';
 
 @Component({
   selector: 'app-cakes',
@@ -18,7 +19,7 @@ export class CakesComponent implements OnInit {
   cakesPerPage: number = 6;
   displayedCakes: Cake[] = [];
 
-  constructor(private cakeService: CakeService) { }
+  constructor(private cakeService: CakeService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getAllCakes();
@@ -80,6 +81,7 @@ export class CakesComponent implements OnInit {
   //added cake to cart
   addToCart(cake: Cake) {
     console.log("cake :>> ", cake);
+    this.cartService.addToCart(cake);
     // Implement your logic to add the cake to the cart
     // For example, you can store the selected cake in a service or local storage
   }
