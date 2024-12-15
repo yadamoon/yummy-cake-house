@@ -1,7 +1,10 @@
 <app-header></app-header>
 <app-banner></app-banner>
-<app-search></app-search>
-<app-cakes></app-cakes>
+<app-search
+  (searchTermChanged)="onSearchTermChanged($event)"
+  (cakeTypeChanged)="onCakeTypeChanged($event)"
+></app-search>
+<app-cakes [term]="searchTerm"></app-cakes>
 <app-home></app-home>
 <app-map></app-map>
 <app-footer></app-footer>

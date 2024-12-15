@@ -4,4 +4,5 @@ export interface Cake {
     description: string;
     price: number;
     image: string;
+    type?: string; // Optional property
 }

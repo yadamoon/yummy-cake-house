@@ -1,20 +1,53 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { HeaderComponent } from "../common/header/header.component";
-import { HomeComponent } from "../home/home.component";
 import { FooterComponent } from "../common/footer/footer.component";
-import { RouterOutlet } from '@angular/router';
-import { BannerComponent } from "../banner/banner.component";
 import { SearchComponent } from "../search/search.component";
 import { CakesComponent } from "../cakes/cakes.component";
-import { MapComponent } from "../map/map.component";
+import { Cake } from '../../model/cake.model';
+import { CakeService } from '../../service/cake.service';
+import { BannerComponent } from '../banner/banner.component';
+import { HomeComponent } from '../home/home.component';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [HeaderComponent, HomeComponent, FooterComponent, BannerComponent, SearchComponent, CakesComponent, MapComponent],
+  imports: [HeaderComponent, FooterComponent, BannerComponent, HomeComponent, MapComponent, SearchComponent, CakesComponent],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+  styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
+  cakes: Cake[] = [];
+  filteredCakes: Cake[] = [];
+  searchTerm: string = "";
+  @ViewChild(CakesComponent) cakesComponent!: CakesComponent;
 
+  constructor(private cakeService: CakeService) { }
+
+  ngOnInit(): void {
+    this.getAllCakes();
+  }
+
+  getAllCakes() {
+    this.cakeService.getCakes().subscribe((cakes) => {
+      this.cakes = cakes;
+      this.filteredCakes = cakes; // Initialize filtered cakes
+      this.cakesComponent.filteredCakes = this.cakes; // Pass initial cakes
+    });
+  }
+
+  onSearchTermChanged(searchTerm: string) {
+    this.searchTerm = searchTerm;
+    console.log("search term changed", this.searchTerm);
+    this.filterCakes();
+
+  }
+
+  onCakeTypeChanged(cakeType: string) {
+    this.filterCakes(cakeType);
+  }
+
+  filterCakes(cakeType: string = '') {
+    this.cakesComponent.filterCakes(this.searchTerm, cakeType);
+  }
 }

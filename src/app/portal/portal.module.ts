@@ -6,6 +6,7 @@ import { PortalRoutingModule } from './portal-routing.module';
   imports: [
     CommonModule,
     PortalRoutingModule
+
   ]
 })
 export class PortalModule { }

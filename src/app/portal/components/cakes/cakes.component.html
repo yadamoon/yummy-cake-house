@@ -1,7 +1,7 @@
 <div class="max-w-screen-xl mx-auto">
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
     <div
-      *ngFor="let cake of cakes"
+      *ngFor="let cake of displayedCakes"
       class="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
     >
       <img
@@ -12,9 +12,9 @@
       <div class="p-4">
         <h2 class="text-lg font-semibold text-gray-800">{{ cake.name }}</h2>
         <p class="mt-2 text-sm text-gray-600">{{ cake.description }}</p>
-        <!-- Assuming your Cake model has a description property -->
         <button
           class="mt-4 w-full py-2 px-4 text-sm font-medium text-white bg-pink-600 rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-400"
+          (click)="addToCart(cake)"
         >
           Order Now
         </button>
@@ -25,19 +25,13 @@
   <!-- Pagination -->
   <div class="flex justify-center mt-6">
     <div class="join">
-      <button class="join-item btn bg-pink-600 text-white hover:bg-pink-700">
-        1
-      </button>
       <button
-        class="join-item btn bg-pink-600 text-white hover:bg-pink-700 btn-active"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        (click)="changePage(i + 1)"
+        [class.btn-active]="currentPage === i + 1"
+        class="join-item btn bg-pink-600 text-white hover:bg-pink-700"
       >
-        2
-      </button>
-      <button class="join-item btn bg-pink-600 text-white hover:bg-pink-700">
-        3
-      </button>
-      <button class="join-item btn bg-pink-600 text-white hover:bg-pink-700">
-        4
+        {{ i + 1 }}
       </button>
     </div>
   </div>
