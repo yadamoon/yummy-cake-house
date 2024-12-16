@@ -34,12 +34,14 @@
         class="card card-compact dropdown-content bg-white text-pink-800 z-[1] mt-3 w-52 shadow"
       >
         <div class="card-body">
+          <div *ngFor="let item of cartItems$ | async">
+            <span>{{ item.name }}</span>
+          </div>
           <span class="text-lg font-bold">{{ itemCount }} Items</span>
           <span class="text-info">Subtotal: ${{ subtotal.toFixed(2) }}</span>
           <div class="card-actions">
             <button
               class="btn bg-pink-600 text-white hover:bg-pink-700 btn-block"
-              routerLink="/cart"
             >
               View cart
             </button>

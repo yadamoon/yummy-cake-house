@@ -3,6 +3,8 @@ import { Cake } from '../../model/cake.model';
 import { CakeService } from './../../service/cake.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '../../service/cart/cart.service';
+import { Store } from '@ngrx/store';
+import { addCake } from '../../../store/actions/cart.actions';
 
 @Component({
   selector: 'app-cakes',
@@ -19,21 +21,33 @@ export class CakesComponent implements OnInit {
   cakesPerPage: number = 6;
   displayedCakes: Cake[] = [];
 
-  constructor(private cakeService: CakeService, private cartService: CartService) { }
+
+  constructor(private cakeService: CakeService, private cartService: CartService,
+    private store: Store<{ cart: { items: Cake[] } }>
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.getAllCakes();
 
   }
 
+  // getAllCakes() {
+  //   this.cakeService.getCakes().subscribe((cakes) => {
+  //     this.cakes = cakes;
+  //     this.displayedCakes = cakes
+  //     this.filteredCakes = cakes; // Initialize filtered cakes
+  //   });
+  // this.updateDisplayedCakes();
+  // }
+
   getAllCakes() {
     this.cakeService.getCakes().subscribe((cakes) => {
       this.cakes = cakes;
-      this.displayedCakes = cakes
       this.filteredCakes = cakes; // Initialize filtered cakes
+      this.updateDisplayedCakes();
     });
-    // this.updateDisplayedCakes();
-
   }
 
   filterCakes(searchTerm: string, cakeType: string) {
@@ -79,10 +93,17 @@ export class CakesComponent implements OnInit {
   }
 
   //added cake to cart
+  // addToCart(cake: any) {
+  //   console.log("cake :>> ", cake);
+  //   this.cartService.addToCart(cake);
+
+  //   this.store.dispatch(addCake({ cake }));
+  //   console.log("cakes :>>>>>>>>>> ", this.cakesCount$);
+
+  //   // For example, you can store the selected cake in a service or local storage
+  // }
+
   addToCart(cake: Cake) {
-    console.log("cake :>> ", cake);
-    this.cartService.addToCart(cake);
-    // Implement your logic to add the cake to the cart
-    // For example, you can store the selected cake in a service or local storage
+    this.store.dispatch(addCake({ cake })); // Dispatch addCake action
   }
 }
