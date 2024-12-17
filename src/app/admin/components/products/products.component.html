@@ -1,0 +1,86 @@
+<!-- products.component.html -->
+<div class="p-6 bg-white rounded-lg shadow-md">
+  <h1 class="text-2xl font-bold text-pink-600 mb-4">Products Management</h1>
+
+  <form (ngSubmit)="addProduct()" class="mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input
+        type="text"
+        [(ngModel)]="newProduct.name"
+        name="name"
+        placeholder="Product Name"
+        class="p-2 border border-gray-300 rounded"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="newProduct.category"
+        name="category"
+        placeholder="Category"
+        class="p-2 border border-gray-300 rounded"
+        required
+      />
+      <input
+        type="number"
+        [(ngModel)]="newProduct.price"
+        name="price"
+        placeholder="Price"
+        class="p-2 border border-gray-300 rounded"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="newProduct.imageUrl"
+        name="imageUrl"
+        placeholder="Image URL"
+        class="p-2 border border-gray-300 rounded"
+      />
+    </div>
+    <button
+      type="submit"
+      class="mt-4 bg-pink-600 text-white py-2 px-4 rounded hover:bg-pink-700"
+    >
+      Add Product
+    </button>
+  </form>
+
+  <table class="min-w-full bg-white border border-gray-300">
+    <thead>
+      <tr class="bg-pink-600 text-white">
+        <th class="py-2 px-4 border">Product Name</th>
+        <th class="py-2 px-4 border">Category</th>
+        <th class="py-2 px-4 border">Price</th>
+        <th class="py-2 px-4 border">Image</th>
+        <th class="py-2 px-4 border">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td class="py-2 px-4 border">{{ product.name }}</td>
+        <td class="py-2 px-4 border">{{ product.category }}</td>
+        <td class="py-2 px-4 border">{{ product.price | currency }}</td>
+        <td class="py-2 px-4 border">
+          <img
+            [src]="product.imageUrl"
+            alt="{{ product.name }}"
+            class="w-16 h-16 object-cover rounded"
+          />
+        </td>
+        <td class="py-2 px-4 border">
+          <button
+            (click)="editProduct(product)"
+            class="text-blue-500 hover:underline"
+          >
+            Edit
+          </button>
+          <button
+            (click)="deleteProduct(product.id)"
+            class="text-red-500 hover:underline"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

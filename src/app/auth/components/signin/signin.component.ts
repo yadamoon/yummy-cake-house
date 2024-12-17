@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
   standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule]
 })
-export class SigninComponent {
+export class SigninComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
   showPassword = false;
@@ -20,6 +20,10 @@ export class SigninComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false]
     });
+  }
+  ngOnInit(): void {
+    console.log("sign in page....");
+
   }
 
   onSubmit() {

@@ -29,7 +29,8 @@
           <span class="badge badge-sm indicator-item">{{ itemCount }}</span>
         </div>
       </div>
-      <div
+      <!-- cart -->
+      <!-- <div
         tabindex="0"
         class="card card-compact dropdown-content bg-white text-pink-800 z-[1] mt-3 w-52 shadow"
       >
@@ -47,7 +48,42 @@
             </button>
           </div>
         </div>
+      </div> -->
+
+      <div
+        tabindex="0"
+        class="card card-compact dropdown-content bg-white text-pink-800 z-10 mt-3 w-64 rounded-lg shadow-lg border border-gray-200"
+      >
+        <div class="card-body p-4">
+          <div
+            *ngFor="let item of cartItems$ | async"
+            class="flex items-center justify-between mb-3"
+          >
+            <span class="text-sm font-medium text-gray-700">{{
+              item.name
+            }}</span>
+            <span class="text-sm font-semibold text-gray-900"
+              >$ {{ item.price.toFixed(2) }}</span
+            >
+          </div>
+          <hr class="border-gray-300 my-3" />
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-base font-bold">{{ itemCount }} Items</span>
+            <span class="text-base font-semibold text-pink-600"
+              >Subtotal: ${{ subtotal.toFixed(2) }}</span
+            >
+          </div>
+          <div class="card-actions">
+            <button
+              class="btn bg-pink-600 text-white hover:bg-pink-700 w-full py-2 rounded-lg font-semibold transition duration-300"
+            >
+              View Cart
+            </button>
+          </div>
+        </div>
       </div>
+
+      <!-- end cart -->
     </div>
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">

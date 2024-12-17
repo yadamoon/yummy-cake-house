@@ -9,18 +9,18 @@ const routes: Routes = [
 
     path: '',
     component: SigninComponent,
-    children: [
-      {
-        path: 'signin',
-        component: SigninComponent
-      },
-      {
-        path: 'signup',
-        component: SignupComponent
-      }
-    ]
-
   },
+  {
+    path: 'signin',
+    component: SigninComponent
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
+  }
+
+
+
 
 
 ];

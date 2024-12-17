@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
   standalone: true,
   imports: [CommonModule, RouterLink, ReactiveFormsModule]
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   isLoading = false;
   showPassword = false;
@@ -75,4 +75,8 @@ export class SignupComponent {
   get password() { return this.signupForm.get('password'); }
   get confirmPassword() { return this.signupForm.get('confirmPassword'); }
   get agreeToTerms() { return this.signupForm.get('agreeToTerms'); }
+  ngOnInit(): void {
+    console.log("sign up page.....");
+
+  }
 }

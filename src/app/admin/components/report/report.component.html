@@ -1,0 +1,244 @@
+<div class="space-y-6">
+  <!-- Page Header -->
+  <div class="flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-gray-800">Reports & Analytics</h1>
+    <div class="flex space-x-4">
+      <button
+        (click)="exportReport()"
+        class="px-4 py-2 bg-[#a10d7c] text-white rounded-lg hover:bg-primary-500 transition-colors"
+      >
+        <i class="fas fa-download mr-2"></i>Export Report
+      </button>
+    </div>
+  </div>
+
+  <!-- Filter Controls -->
+  <div class="bg-white rounded-xl p-6 shadow-sm">
+    <div class="flex flex-wrap gap-4">
+      <select
+        [(ngModel)]="selectedPeriod"
+        (change)="updatePeriod(selectedPeriod)"
+        class="px-4 py-2 rounded-lg bg-white border border-gray-200 focus:border-primary-400 focus:outline-none"
+      >
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+        <option value="yearly">Yearly</option>
+      </select>
+
+      <select
+        [(ngModel)]="selectedYear"
+        class="px-4 py-2 rounded-lg bg-white border border-gray-200 focus:border-primary-400 focus:outline-none"
+      >
+        <option [value]="2024">2024</option>
+        <option [value]="2023">2023</option>
+        <option [value]="2022">2022</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Stats Overview -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Total Revenue -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm text-gray-600 mb-1">Total Revenue</p>
+          <p class="text-2xl font-bold text-gray-800">$1,250,000</p>
+          <p class="text-sm text-green-500 mt-2">
+            <i class="fas fa-arrow-up mr-1"></i>15.3% vs last month
+          </p>
+        </div>
+        <div
+          class="w-12 h-12 bg-primary-400/10 rounded-lg flex items-center justify-center"
+        >
+          <i class="fas fa-dollar-sign text-xl text-primary-400"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Properties Sold -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm text-gray-600 mb-1">Properties Sold</p>
+          <p class="text-2xl font-bold text-gray-800">45</p>
+          <p class="text-sm text-green-500 mt-2">
+            <i class="fas fa-arrow-up mr-1"></i>8.2% vs last month
+          </p>
+        </div>
+        <div
+          class="w-12 h-12 bg-primary-400/10 rounded-lg flex items-center justify-center"
+        >
+          <i class="fas fa-home text-xl text-primary-400"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Listings -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm text-gray-600 mb-1">New Listings</p>
+          <p class="text-2xl font-bold text-gray-800">67</p>
+          <p class="text-sm text-green-500 mt-2">
+            <i class="fas fa-arrow-up mr-1"></i>12.5% vs last month
+          </p>
+        </div>
+        <div
+          class="w-12 h-12 bg-primary-400/10 rounded-lg flex items-center justify-center"
+        >
+          <i class="fas fa-list text-xl text-primary-400"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Satisfaction -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm text-gray-600 mb-1">Customer Satisfaction</p>
+          <p class="text-2xl font-bold text-gray-800">95%</p>
+          <p class="text-sm text-green-500 mt-2">
+            <i class="fas fa-arrow-up mr-1"></i>2.1% vs last month
+          </p>
+        </div>
+        <div
+          class="w-12 h-12 bg-primary-400/10 rounded-lg flex items-center justify-center"
+        >
+          <i class="fas fa-smile text-xl text-primary-400"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Sales Revenue Chart -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h2 class="text-lg font-bold text-gray-800 mb-4">Sales Revenue</h2>
+      <div class="h-80">
+        <!-- Add your preferred chart library implementation here -->
+      </div>
+    </div>
+
+    <!-- Property Distribution Chart -->
+    <div class="bg-white rounded-xl p-6 shadow-sm">
+      <h2 class="text-lg font-bold text-gray-800 mb-4">
+        Property Distribution
+      </h2>
+      <div class="h-80">
+        <!-- Add your preferred chart library implementation here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Performing Agents -->
+  <div class="bg-white rounded-xl shadow-sm">
+    <div class="p-6">
+      <h2 class="text-lg font-bold text-gray-800 mb-4">
+        Top Performing Agents
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        @for (agent of topAgents; track agent.name) {
+        <div class="bg-gray-50 rounded-lg p-4">
+          <div class="flex items-center space-x-4">
+            <img
+              [src]="agent.image"
+              [alt]="agent.name"
+              class="w-12 h-12 rounded-full"
+            />
+            <div>
+              <h3 class="font-medium text-gray-800">{{ agent.name }}</h3>
+              <p class="text-sm text-gray-500">{{ agent.sales }} sales</p>
+            </div>
+          </div>
+          <div class="mt-4">
+            <p class="text-lg font-bold text-primary-400">
+              ${{ agent.revenue.toLocaleString() }}
+            </p>
+            <p class="text-sm text-gray-500">Total Revenue</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Transactions -->
+  <div class="bg-white rounded-xl shadow-sm">
+    <div class="p-6">
+      <h2 class="text-lg font-bold text-gray-800 mb-4">Recent Transactions</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-gray-50">
+            <tr>
+              <th
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                ID
+              </th>
+              <th
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                Property
+              </th>
+              <th
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                Buyer
+              </th>
+              <th
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                Amount
+              </th>
+              <th
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                Date
+              </th>
+              <th
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+              >
+                Status
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            @for (transaction of recentTransactions; track transaction.id) {
+            <tr>
+              <td class="px-6 py-4 text-sm text-gray-500">
+                {{ transaction.id }}
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-800">
+                {{ transaction.property }}
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-800">
+                {{ transaction.buyer }}
+              </td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-800">
+                ${{ transaction.amount.toLocaleString() }}
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-500">
+                {{ transaction.date | date : "mediumDate" }}
+              </td>
+              <td class="px-6 py-4">
+                <span
+                  [class]="
+                    'px-2 py-1 text-xs rounded-full ' +
+                    (transaction.status === 'Completed'
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-yellow-100 text-yellow-800')
+                  "
+                >
+                  {{ transaction.status }}
+                </span>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,285 @@
+<div class="min-h-screen">
+  <!-- Sidebar -->
+  <!-- i use the bg image and rotate column -->
+  <aside
+    class="fixed inset-y-0 left-0 w-64 bg-[#a10d7c] text-white transition-transform duration-300"
+    [class.translate-x-0]="isSidebarOpen"
+    [class.-translate-x-full]="!isSidebarOpen"
+  >
+    <!-- Logo -->
+    <div class="p-4 border-b border-white my-2 text-white">
+      <div class="flex items-center space-x-2">
+        <img
+          src="https://yummy-cakes.co.za/wp-content/uploads/2021/08/Logo-yummy-1.webp"
+          class="w-8 h-8"
+          alt=""
+        />
+        <span class="text-xl font-bold">Yummy</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="p-4 space-y-2 text-white">
+      <a
+        routerLink="/admin/dashboard"
+        routerLinkActive="bg-primary-400"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#da2778] transition-colors"
+      >
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+        <span>Dashboard</span>
+      </a>
+      <a
+        routerLink="/admin/order"
+        routerLinkActive="bg-primary-400"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#c02068] transition-colors"
+      >
+        <svg
+          class="w-6 h-6 text-white"
+          viewBox="0 0 1024 1024"
+          fill="#ffffff"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M300 462.4h424.8v48H300v-48zM300 673.6H560v48H300v-48z"
+              fill=""
+            ></path>
+            <path
+              d="M818.4 981.6H205.6c-12.8 0-24.8-2.4-36.8-7.2-11.2-4.8-21.6-11.2-29.6-20-8.8-8.8-15.2-18.4-20-29.6-4.8-12-7.2-24-7.2-36.8V250.4c0-12.8 2.4-24.8 7.2-36.8 4.8-11.2 11.2-21.6 20-29.6 8.8-8.8 18.4-15.2 29.6-20 12-4.8 24-7.2 36.8-7.2h92.8v47.2H205.6c-25.6 0-47.2 20.8-47.2 47.2v637.6c0 25.6 20.8 47.2 47.2 47.2h612c25.6 0 47.2-20.8 47.2-47.2V250.4c0-25.6-20.8-47.2-47.2-47.2H725.6v-47.2h92.8c12.8 0 24.8 2.4 36.8 7.2 11.2 4.8 21.6 11.2 29.6 20 8.8 8.8 15.2 18.4 20 29.6 4.8 12 7.2 24 7.2 36.8v637.6c0 12.8-2.4 24.8-7.2 36.8-4.8 11.2-11.2 21.6-20 29.6-8.8 8.8-18.4 15.2-29.6 20-12 5.6-24 8-36.8 8z"
+              fill=""
+            ></path>
+            <path
+              d="M747.2 297.6H276.8V144c0-32.8 26.4-59.2 59.2-59.2h60.8c21.6-43.2 66.4-71.2 116-71.2 49.6 0 94.4 28 116 71.2h60.8c32.8 0 59.2 26.4 59.2 59.2l-1.6 153.6z m-423.2-47.2h376.8V144c0-6.4-5.6-12-12-12H595.2l-5.6-16c-11.2-32.8-42.4-55.2-77.6-55.2-35.2 0-66.4 22.4-77.6 55.2l-5.6 16H335.2c-6.4 0-12 5.6-12 12v106.4z"
+              fill=""
+            ></path>
+          </g>
+        </svg>
+
+        <span>Order</span>
+      </a>
+
+      <a
+        routerLink="/admin/products"
+        routerLinkActive="bg-primary-400"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#da2778] transition-colors"
+      >
+        <svg
+          class="w-6 h-6 text-white"
+          viewBox="0 0 512 512"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          fill="#ffffff"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <title>product</title>
+            <g
+              id="Page-1"
+              stroke="none"
+              stroke-width="1"
+              fill="none"
+              fill-rule="evenodd"
+            >
+              <g
+                id="icon"
+                fill="#ffffff"
+                transform="translate(64.000000, 34.346667)"
+              >
+                <path
+                  d="M192,7.10542736e-15 L384,110.851252 L384,332.553755 L192,443.405007 L1.42108547e-14,332.553755 L1.42108547e-14,110.851252 L192,7.10542736e-15 Z M127.999,206.918 L128,357.189 L170.666667,381.824 L170.666667,231.552 L127.999,206.918 Z M42.6666667,157.653333 L42.6666667,307.920144 L85.333,332.555 L85.333,182.286 L42.6666667,157.653333 Z M275.991,97.759 L150.413,170.595 L192,194.605531 L317.866667,121.936377 L275.991,97.759 Z M192,49.267223 L66.1333333,121.936377 L107.795,145.989 L233.374,73.154 L192,49.267223 Z"
+                  id="Combined-Shape"
+                ></path>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <span>Product</span>
+      </a>
+
+      <a
+        routerLink="/admin/inventory"
+        routerLinkActive="bg-primary-400"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#da2778] transition-colors"
+      >
+        <svg
+          class="w-6 h-6 text-white"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M0 4.6A2.6 2.6 0 0 1 2.6 2h18.8A2.6 2.6 0 0 1 24 4.6v.8A2.6 2.6 0 0 1 21.4 8H21v10.6c0 1.33-1.07 2.4-2.4 2.4H5.4C4.07 21 3 19.93 3 18.6V8h-.4A2.6 2.6 0 0 1 0 5.4v-.8ZM2.6 4a.6.6 0 0 0-.6.6v.8a.6.6 0 0 0 .6.6h18.8a.6.6 0 0 0 .6-.6v-.8a.6.6 0 0 0-.6-.6H2.6ZM8 10a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8Z"
+              fill="#fcfcfc"
+            ></path>
+          </g>
+        </svg>
+        <span>Inventory</span>
+      </a>
+      <a
+        routerLink="/admin/users"
+        routerLinkActive="bg-primary-400"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#da2778] transition-colors"
+      >
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+          />
+        </svg>
+        <span>Users</span>
+      </a>
+
+      <a
+        routerLink="/admin/report"
+        routerLinkActive="bg-primary-400"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#da2778] transition-colors"
+      >
+        <svg
+          class="w-6 h-6 text-white"
+          fill="#ffffff"
+          viewBox="0 0 32 32"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <title>report</title>
+            <path
+              d="M6 11h4v17h-4v-17zM22 16v12h4v-12h-4zM14 28h4v-24h-4v24z"
+            ></path>
+          </g>
+        </svg>
+        <span>Report</span>
+      </a>
+
+      <a
+        routerLink="/admin/settings"
+        routerLinkActive="bg-primary-400"
+        class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-[#da2778] transition-colors"
+      >
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"
+          />
+        </svg>
+        <span>Settings</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="ml-64 min-h-screen">
+    <!-- Top Navigation -->
+    <header class="bg-white shadow-md">
+      <div class="flex items-center justify-between px-6 py-4">
+        <button (click)="toggleSidebar()" class="lg:hidden">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+
+        <!-- Search -->
+        <div class="hidden md:flex flex-1 max-w-xl mx-6">
+          <div class="relative w-full">
+            <input
+              type="text"
+              placeholder="Search..."
+              class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-800 bg-transparent hover:bg-gray-100 focus:border-primary-400 focus:outline-none"
+            />
+            <i
+              class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            ></i>
+          </div>
+        </div>
+
+        <!-- User Menu -->
+        <div class="flex items-center space-x-4">
+          <button class="relative">
+            <svg
+              class="h-6 w-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            <span
+              class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center"
+            >
+              3
+            </span>
+          </button>
+
+          <div class="relative" #userMenu>
+            <button
+              (click)="toggleUserMenu()"
+              class="flex items-center space-x-2"
+            >
+              <img
+                src="https://media.licdn.com/dms/image/v2/D4E35AQHt3Vf70rW0aw/profile-framedphoto-shrink_200_200/profile-framedphoto-shrink_200_200/0/1712760923496?e=1735030800&v=beta&t=TUnjaijR7HGC1vFCKyRIf4QeF9gxOdAgYMLcgzAFcws"
+                alt="Admin"
+                class="w-8 h-8 rounded-full"
+              />
+              <span class="hidden md:inline">Yared</span>
+              <i class="fas fa-chevron-down text-sm"></i>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div
+              *ngIf="isUserMenuOpen"
+              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2"
+            >
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">
+                <i class="fas fa-user mr-2"></i>Profile
+              </a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">
+                <i class="fas fa-cog mr-2"></i>Settings
+              </a>
+              <div class="border-t border-gray-100 my-2"></div>
+              <button
+                class="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+              >
+                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="p-6">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
