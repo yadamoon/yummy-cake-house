@@ -64,6 +64,8 @@ export class HeaderComponent implements OnInit {
     // Subscribe to cartItems$ to update itemCount and subtotal
     this.cartItems$.subscribe((items) => {
       this.itemCount = items.length;
+      console.log("items count :>>", this.itemCount);
+
       this.subtotal = items.reduce((sum, item) => sum + item.price, 0); // Assuming each Cake has a price property
     });
   }
