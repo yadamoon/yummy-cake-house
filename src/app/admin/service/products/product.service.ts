@@ -1,42 +1,60 @@
-import { addCake } from './../../../store/actions/cart.actions';
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { Product } from '../../../portal/model/product.model';
+import { environment } from '../../../../environments/environment';
+
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3000/api/v1/products';
+  private apiUrl = `${environment.apiUrl}/products`;
 
   constructor(private http: HttpClient) { }
 
-  // Add Product
-  addCake(product: any): Observable<any> {
-    console.log('Adding cake', product);
-    const r = this.http.post<any>(this.apiUrl, product)
-    console.log("result", r)
-    return r;
-    // return this.http.post<any>(this.apiUrl, product);
+  // Get all products
+  getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl);
   }
 
-  // Get All Products
-  getAllProducts(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  // Get product by ID
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
-  // Get Product by ID
-  getProductById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  // Add a new product
+  addCake(product: Product): Observable<any> {
+    console.log("product:>>>>>>>>>", product);
+
+    const formData = new FormData();
+    formData.append('name', product.name);
+    formData.append('price', product.price.toString());
+    formData.append('description', product.description);
+    formData.append('size', product.size.toString());
+    formData.append('category', product.category);
+    if (product.image) {
+      formData.append('image', product.image);
+    }
+    console.log("form data:>>", formData.get('name'));
+    console.log("form data:>>", formData.get('image'));
+    console.log("form data:>>", formData.get('description'));
+    console.log("form data:>>", formData.get('size'));
+    console.log("form data:>>", formData.get('category'));
+    console.log("form data:>>", formData.get('price'));
+
+
+    return this.http.post(`${this.apiUrl}`, formData);
   }
 
-  // Update Product
-  updateProduct(id: number, product: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, product);
+  // Update an existing product
+  updateProduct(id: number, product: Product): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, product);
   }
 
-  // Delete Product
-  deleteProduct(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  // Delete a product
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

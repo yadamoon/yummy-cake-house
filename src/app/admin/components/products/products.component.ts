@@ -1,25 +1,28 @@
-import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { ProductService } from "../../service/products/product.service";
-import { Cake } from "../../../portal/model/cake.model";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ProductService } from '../../service/products/product.service';
+import { Product } from '../../../portal/model/product.model';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
-  selector: "app-products",
+  selector: 'app-products',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
-  templateUrl: "./products.component.html",
-  styleUrls: ["./products.component.css"],
+  templateUrl: './products.component.html',
+  styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
   productForm!: FormGroup;
-  products: any[] = [];
+  products: Product[] = [];
   isEditMode = false;
   editingProductId: number | null = null;
   imagePreview: string | null = null;
-
-  // Define categories here (you can later fetch from the API if needed)
   categories: string[] = ['Cake', 'Pastry', 'Cookie', 'Cupcake', 'Beverage'];
+
+
+  isModalOpen: boolean = false;
+  selectedImage: string = '';
 
   constructor(private fb: FormBuilder, private productService: ProductService) { }
 
@@ -35,41 +38,47 @@ export class ProductsComponent implements OnInit {
       size: ['', [Validators.required, Validators.min(1)]],
       price: ['', [Validators.required, Validators.min(0)]],
       category: ['', Validators.required],
-      image: [''],
+      image: [null],
     });
   }
 
   loadProducts(): void {
     this.productService.getAllProducts().subscribe((products) => {
       this.products = products;
+      console.log("products", this.products);
+
     });
   }
 
   addOrUpdateProduct(): void {
+
     if (this.productForm.invalid) return;
 
-    const product = this.productForm.value;
+    const product: Product = this.productForm.value;
+    console.log("product", product)
     if (this.isEditMode && this.editingProductId !== null) {
+      console.log("update");
+
       this.productService.updateProduct(this.editingProductId, product).subscribe(() => {
         this.loadProducts();
         this.resetForm();
       });
     } else {
-      // const fd = new FormData()
-      // fd.append('name', product.name);
-      this.productService.addCake(product).subscribe((result) => {
-        console.log('Product added successfully', result);
+      console.log("add");
+
+      this.productService.addCake(product).subscribe(() => {
+        console.log("inside addOrUpdateProduct", product)
         this.loadProducts();
         this.resetForm();
       });
     }
   }
 
-  editProduct(product: any): void {
+  editProduct(product: Product): void {
     this.productForm.patchValue(product);
     this.imagePreview = product.image || null;
     this.isEditMode = true;
-    this.editingProductId = product.id;
+    // this.editingProductId = product.id;
   }
 
   deleteProduct(id: number): void {
@@ -93,6 +102,17 @@ export class ProductsComponent implements OnInit {
         this.imagePreview = reader.result as string;
       };
       reader.readAsDataURL(file);
+      this.productForm.patchValue({ image: file });
     }
+  }
+  openModalImage(imageUrl: string): void {
+    this.selectedImage = imageUrl;
+    this.isModalOpen = true;
+    console.log("img", this.selectedImage);
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.selectedImage = '';
   }
 }

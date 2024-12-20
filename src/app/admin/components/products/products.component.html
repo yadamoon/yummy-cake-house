@@ -1,3 +1,35 @@
+<div
+  *ngIf="isModalOpen"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  (click)="closeModal()"
+>
+  <div
+    class="relative bg-white rounded-lg overflow-hidden shadow-lg max-w-6xl w-full"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- Close Button -->
+    <button
+      (click)="closeModal()"
+      class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 focus:outline-none"
+      aria-label="Close Modal"
+    >
+      ✖
+    </button>
+
+    <!-- Modal Content -->
+    <div class="p-4">
+      <img
+        [src]="selectedImage"
+        alt="Product Image"
+        class="w-full h-auto object-contain"
+      />
+    </div>
+  </div>
+</div>
+
 <div class="max-w-screen-md mx-auto p-2">
   <!-- Form Section -->
   <form
@@ -179,27 +211,52 @@
   </form>
 
   <!-- Products List -->
-  <div class="mt-8">
-    <h2 class="text-xl font-semibold text-gray-800 mb-4">Products</h2>
-    <ul class="space-y-4">
-      <li *ngFor="let product of products" class="p-4 border-b border-gray-300">
-        <h3 class="text-lg font-medium text-gray-700">{{ product.name }}</h3>
-        <p class="text-sm text-gray-500">{{ product.description }}</p>
-        <div class="mt-2">
+</div>
+<div class="max-w-screen-xl mx-auto mt-8 px-4">
+  <h2 class="text-3xl font-semibold text-gray-800 mb-6">Our Products</h2>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8"
+  >
+    <div
+      *ngFor="let product of products"
+      class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition-all duration-300 ease-in-out"
+    >
+      <div class="relative">
+        <!-- Product Image -->
+        <img
+          src="http://localhost:3000/uploads/{{ product.image }}"
+          alt="{{ product.name }}"
+          (click)="
+            openModalImage('http://localhost:3000/uploads/' + product.image)
+          "
+          class="w-full h-56 object-cover rounded-t-xl"
+        />
+        <span
+          class="absolute top-4 right-4 bg-indigo-600 text-white text-xs px-3 py-1 rounded-full"
+        >
+          {{ product.category }}
+        </span>
+      </div>
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-gray-800 truncate">
+          {{ product.name }}
+        </h3>
+        <p class="text-sm text-gray-600 mt-2">{{ product.description }}</p>
+        <div class="mt-4 flex justify-end space-x-4">
           <button
             (click)="editProduct(product)"
-            class="text-blue-600 hover:text-blue-500"
+            class="text-indigo-600 hover:text-indigo-500 font-medium focus:outline-none"
           >
             Edit
           </button>
           <button
-            (click)="deleteProduct(product.id)"
-            class="text-red-600 hover:text-red-500 ml-4"
+            (click)="deleteProduct(product.id!)"
+            class="text-red-600 hover:text-red-500 font-medium focus:outline-none"
           >
             Delete
           </button>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </div>
