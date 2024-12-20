@@ -8,6 +8,7 @@
       </p>
     </div>
     <div class="card w-full max-w-sm shrink-0 shadow-2xl bg-white">
+      <!-- Logo Section -->
       <div class="flex justify-center mt-6">
         <img
           src="https://yummy-cakes.co.za/wp-content/uploads/2021/08/Logo-yummy-1.webp"
@@ -15,7 +16,7 @@
           class="h-20"
         />
       </div>
-      <form class="card-body">
+      <form class="card-body" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <!-- Email -->
         <div class="form-control">
           <label class="label">
@@ -23,32 +24,75 @@
           </label>
           <input
             type="email"
+            name="email"
+            formControlName="email"
             placeholder="Enter your email"
             class="input input-bordered bg-white text-black border-pink-400"
-            required
           />
+          <div
+            class="text-red-500 text-sm mt-1"
+            *ngIf="email?.invalid && email?.touched"
+          >
+            <p *ngIf="email?.errors?.['required']">Email is required.</p>
+            <p *ngIf="email?.errors?.['email']">Please enter a valid email.</p>
+          </div>
         </div>
         <!-- Password -->
         <div class="form-control">
           <label class="label">
             <span class="label-text text-pink-800">Password</span>
           </label>
-          <input
-            type="password"
-            placeholder="Enter your password"
-            class="input input-bordered bg-white text-black border-pink-400"
-            required
-          />
+          <div class="flex items-center relative">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              name="password"
+              formControlName="password"
+              placeholder="Enter your password"
+              class="input input-bordered bg-white text-black border-pink-400 flex-grow"
+            />
+            <button
+              type="button"
+              class="absolute right-3 text-pink-600"
+              (click)="togglePasswordVisibility()"
+            >
+              <span *ngIf="showPassword">Hide</span>
+              <span *ngIf="!showPassword">Show</span>
+            </button>
+          </div>
+          <div
+            class="text-red-500 text-sm mt-1"
+            *ngIf="password?.invalid && password?.touched"
+          >
+            <p *ngIf="password?.errors?.['required']">Password is required.</p>
+            <p *ngIf="password?.errors?.['minlength']">
+              Password must be at least 6 characters.
+            </p>
+          </div>
           <label class="label">
             <a href="#" class="label-text-alt link link-hover text-pink-600"
               >Forgot password?</a
             >
           </label>
         </div>
+        <!-- Remember Me -->
+        <div class="form-control">
+          <label class="cursor-pointer flex items-center gap-2">
+            <input
+              type="checkbox"
+              formControlName="rememberMe"
+              class="checkbox checkbox-pink"
+            />
+            <span class="text-pink-800">Remember Me</span>
+          </label>
+        </div>
         <!-- Submit Button -->
         <div class="form-control mt-6">
-          <button class="btn bg-pink-600 text-white hover:bg-pink-700">
-            Login
+          <button
+            type="submit"
+            class="btn bg-pink-600 text-white hover:bg-pink-700"
+            [disabled]="isLoading"
+          >
+            {{ isLoading ? "Logging In..." : "Login" }}
           </button>
         </div>
         <!-- Link to Sign-Up -->

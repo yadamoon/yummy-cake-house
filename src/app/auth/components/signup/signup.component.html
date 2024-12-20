@@ -1,9 +1,7 @@
 <div class="hero min-h-screen bg-blue-50">
-  <!-- Logo Section -->
   <div
     class="flex justify-center items-center p-6 bg-blue-50 rounded-full mx-auto mt-10"
   >
-    <!-- Sign-Up Form -->
     <div class="hero-content flex-col lg:flex-row-reverse mt-6">
       <div class="text-center lg:text-left">
         <h1 class="text-5xl font-bold text-pink-600">Join the Yummy Family!</h1>
@@ -13,80 +11,107 @@
         </p>
       </div>
       <div class="card w-full max-w-sm shrink-0 shadow-2xl bg-white">
-        <div class="flex justify-center mt-6">
-          <img
-            src="https://yummy-cakes.co.za/wp-content/uploads/2021/08/Logo-yummy-1.webp"
-            alt="Yummy Cakes Logo"
-            class="h-20"
-          />
-        </div>
-        <form class="card-body">
-          <!-- Name -->
+        <form
+          [formGroup]="signupForm"
+          (ngSubmit)="onSubmit()"
+          class="card-body"
+        >
           <div class="form-control">
             <label class="label">
               <span class="label-text text-pink-800">Full Name</span>
             </label>
             <input
               type="text"
+              formControlName="fullName"
               placeholder="Enter your full name"
               class="input input-bordered bg-white text-black border-pink-400"
-              required
             />
+            <div
+              *ngIf="fullName?.touched && fullName?.invalid"
+              class="text-red-500 text-sm"
+            >
+              <p *ngIf="fullName?.errors?.['required']">Name is required.</p>
+              <p *ngIf="fullName?.errors?.['minlength']">
+                Name must be at least 2 characters long.
+              </p>
+            </div>
           </div>
-          <!-- Email -->
           <div class="form-control">
             <label class="label">
               <span class="label-text text-pink-800">Email</span>
             </label>
             <input
               type="email"
+              formControlName="email"
               placeholder="Enter your email"
               class="input input-bordered bg-white text-black border-pink-400"
-              required
             />
+            <div
+              *ngIf="email?.touched && email?.invalid"
+              class="text-red-500 text-sm"
+            >
+              <p *ngIf="email?.errors?.['required']">Email is required.</p>
+              <p *ngIf="email?.errors?.['email']">Invalid email format.</p>
+            </div>
           </div>
-          <!-- Password -->
           <div class="form-control">
             <label class="label">
               <span class="label-text text-pink-800">Password</span>
             </label>
             <input
               type="password"
+              formControlName="password"
               placeholder="Enter your password"
               class="input input-bordered bg-white text-black border-pink-400"
-              required
             />
+            <div
+              *ngIf="password?.touched && password?.invalid"
+              class="text-red-500 text-sm"
+            >
+              <p *ngIf="password?.errors?.['required']">
+                Password is required.
+              </p>
+              <p *ngIf="password?.errors?.['pattern']">
+                Password must include uppercase, lowercase, number, and special
+                character.
+              </p>
+            </div>
           </div>
-          <!-- Confirm Password -->
           <div class="form-control">
             <label class="label">
               <span class="label-text text-pink-800">Confirm Password</span>
             </label>
             <input
               type="password"
+              formControlName="confirmPassword"
               placeholder="Re-enter your password"
               class="input input-bordered bg-white text-black border-pink-400"
-              required
             />
+            <div
+              *ngIf="signupForm.errors?.['mismatch']"
+              class="text-red-500 text-sm"
+            >
+              Passwords must match.
+            </div>
           </div>
-          <!-- Submit Button -->
           <div class="form-control mt-6">
-            <button class="btn bg-pink-600 text-white hover:bg-pink-700">
+            <button
+              type="submit"
+              class="btn bg-pink-600 text-white hover:bg-pink-700"
+              [disabled]="signupForm.invalid"
+            >
               Sign Up
             </button>
           </div>
-          <!-- Link to Sign-In -->
           <p class="mt-4 text-center text-pink-800">
             Already have an account?
             <a
               routerLink="/auth/signin"
               class="link link-hover text-pink-600 font-bold"
+              >Sign In</a
             >
-              Sign In
-            </a>
           </p>
         </form>
-        <div class="card w-full max-w-sm shrink-0 shadow-2xl bg-white"></div>
       </div>
     </div>
   </div>
