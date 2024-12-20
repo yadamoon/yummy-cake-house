@@ -5,6 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '../../service/cart/cart.service';
 import { Store } from '@ngrx/store';
 import { addCake } from '../../../store/actions/cart.actions';
+import { ProductService } from '../../../admin/service/products/product.service';
 
 @Component({
   selector: 'app-cakes',
@@ -21,8 +22,12 @@ export class CakesComponent implements OnInit {
   cakesPerPage: number = 6;
   displayedCakes: Cake[] = [];
 
+  isModalOpen: boolean = false;
+  selectedImage: string = '';
+
 
   constructor(private cakeService: CakeService, private cartService: CartService,
+    private productService: ProductService,
     private store: Store<{ cart: { items: Cake[] } }>
   ) {
 
@@ -43,11 +48,22 @@ export class CakesComponent implements OnInit {
   // }
 
   getAllCakes() {
-    this.cakeService.getCakes().subscribe((cakes) => {
-      this.cakes = cakes;
-      this.filteredCakes = cakes; // Initialize filtered cakes
+    this.productService.getAllProducts().subscribe((products) => {
+      this.cakes = products.map(product => ({
+        ...product,
+        id: product.id ?? 0,
+        imageUrl: product.image || '',
+        quantity: 0,
+        size: product.size.toString()
+      }));
+      this.filteredCakes = this.cakes;
       this.updateDisplayedCakes();
     });
+    // this.cakeService.getCakes().subscribe((cakes) => {
+    //   this.cakes = cakes;
+    //   this.filteredCakes = cakes; // Initialize filtered cakes
+    //   this.updateDisplayedCakes();
+    // });
   }
 
   filterCakes(searchTerm: string, cakeType: string) {
@@ -105,5 +121,14 @@ export class CakesComponent implements OnInit {
 
   addToCart(cake: Cake) {
     this.store.dispatch(addCake({ cake })); // Dispatch addCake action
+  }
+  openModalImage(imageUrl: string): void {
+    this.selectedImage = imageUrl;
+    this.isModalOpen = true;
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.selectedImage = '';
   }
 }
