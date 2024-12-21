@@ -28,7 +28,7 @@ export class LayoutComponent implements OnInit {
   constructor(private cakeService: CakeService, private store: Store<{ auth: AuthState }>, private router: Router) { }
 
   ngOnInit(): void {
-    this.getAllCakes();
+    // this.getAllCakes();
 
   }
 

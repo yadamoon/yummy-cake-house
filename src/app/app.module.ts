@@ -8,13 +8,15 @@ import { cartReducer } from './store/reducers/cart.reducer';
 import { bootstrapApplication } from '@angular/platform-browser';
 
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { authReducer } from './store/reducers/auth.reducer';
 
 @NgModule({
     imports: [
         BrowserModule,
         HttpClientModule,
         PortalModule,// Register the reducer
-        StoreModule.forRoot({ cart: cartReducer })
+        StoreModule.forRoot({ cart: cartReducer }),
+        StoreModule.forRoot({ auth: authReducer }),
     ],
     providers: [
         provideStore(),

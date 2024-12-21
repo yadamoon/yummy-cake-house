@@ -18,12 +18,13 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
     initialState,
-    on(AuthActions.login, (state) => ({ ...state, loading: true, error: null })),
+    // on(AuthActions.login, (state) => ({ ...state, loading: true, error: null, token: state.token })),
+    on(AuthActions.login, (state, { token }) => ({ ...state, loading: true, error: null, token: token })),
     on(AuthActions.loginSuccess, (state, { user }) => {
         localStorage.setItem('token', user.token); // Save token to localStorage
         return { ...state, loading: true, token: user.token, user };
     }),
-    on(AuthActions.loginFailure, (state, { error }) => ({ ...state, loading: false, error }))
+    // on(AuthActions.loginFailure, (state, { error }) => ({ ...state, loading: false, error }))
     // on(AuthActions.login, (state) => ({
     //     ...state,
     //     isLoading: true,

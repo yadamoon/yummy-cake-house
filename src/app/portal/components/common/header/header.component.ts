@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../auth/service/auth.service';
 import { addCake } from './../../../../store/actions/cart.actions';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
@@ -28,7 +29,7 @@ export class HeaderComponent implements OnInit {
 
   // }
 
-  constructor(private store: Store<{ cart: CartState }>) {
+  constructor(private store: Store<{ cart: CartState }>, private authService: AuthService) {
     // Select items from the cart slice
     this.cartItems$ = this.store.select((state) => state.cart.items);
   }
@@ -72,6 +73,11 @@ export class HeaderComponent implements OnInit {
 
   addCake(cake: Cake) {
     this.store.dispatch(addCake({ cake })); // Dispatch the action
+  }
+
+  logout() {
+    this.authService.logout();
+
   }
 
 

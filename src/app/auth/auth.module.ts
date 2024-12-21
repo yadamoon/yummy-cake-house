@@ -13,7 +13,7 @@ import { AuthEffects } from '../store/effects/auth.effects';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    StoreModule.forFeature('auth', authReducer),
+    StoreModule.forRoot({ auth: authReducer }),
     EffectsModule.forFeature([AuthEffects]),
 
   ]
