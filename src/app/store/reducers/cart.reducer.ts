@@ -12,7 +12,17 @@ export const initialState: CartState = {
 };
 export const cartReducer = createReducer(
     initialState,
-    on(addCake, (state, { cake }) => ({ ...state, items: [...state.items, cake] })),
+    on(addCake, (state, { cake }) => (
+        // Add the new cake to the cart and cjeck if the cake is already in the cart but increase the quantity
+        {
+            ...state,
+            items: state.items.some((item) => item.id === cake.id)
+                ? state.items.map((item) =>
+                    item.id === cake.id ? { ...item, quantity: item.quantity + 1 } : item
+                )
+                : [...state.items, { ...cake, quantity: 1 }],
+        }
+    )),
     on(removeCake, (state, { cakeId }) => ({
         ...state,
         items: state.items.filter((item) => item.id !== cakeId),
