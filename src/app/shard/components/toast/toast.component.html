@@ -1,0 +1,12 @@
+<div
+  *ngIf="toasts.length > 0"
+  class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 flex flex-col space-y-4"
+>
+  <div
+    *ngFor="let toast of toasts"
+    [class]="toastClasses(toast.type)"
+    class="max-w-sm w-full px-4 py-3 rounded-lg shadow-lg flex items-center space-x-2"
+  >
+    <span class="font-medium">{{ toast.message }}</span>
+  </div>
+</div>

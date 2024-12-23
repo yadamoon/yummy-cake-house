@@ -250,7 +250,7 @@
             Edit
           </button>
           <button
-            (click)="deleteProduct(product.id!)"
+            (click)="deleteProduct(product._id || '')"
             class="text-red-600 hover:text-red-500 font-medium focus:outline-none"
           >
             Delete

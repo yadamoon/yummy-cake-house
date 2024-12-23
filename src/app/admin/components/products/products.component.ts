@@ -81,7 +81,7 @@ export class ProductsComponent implements OnInit {
     // this.editingProductId = product.id;
   }
 
-  deleteProduct(id: number): void {
+  deleteProduct(id: string): void {
     this.productService.deleteProduct(id).subscribe(() => {
       this.loadProducts();
     });

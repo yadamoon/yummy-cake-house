@@ -1,18 +1,19 @@
 import { AuthService } from './../../../../auth/service/auth.service';
 import { addCake, clearCart } from './../../../../store/actions/cart.actions';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Cake } from '../../../model/cake.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CartState } from '../../../../store/reducers/cart.reducer';
 import { OrderService } from '../../../service/order.service';
 import { Order } from '../../../model/order.model';
+import { ToastComponent } from '../../../../shard/components/toast/toast.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ToastComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
@@ -22,6 +23,7 @@ export class HeaderComponent implements OnInit {
   subtotal: number = 0; // Total cost of items in the cart
   allItems: Cake[] = []; // Array to store cart items
 
+  @ViewChild(ToastComponent) toast!: ToastComponent;
   constructor(
     private store: Store<{ cart: CartState }>,
     private authService: AuthService,
@@ -105,8 +107,10 @@ export class HeaderComponent implements OnInit {
     // Call the OrderService to place the order
     this.orderService.placeOrder(order).subscribe({
       next: () => {
+
         alert('Order placed successfully!');
         this.store.dispatch(clearCart()); // Clear the cart after success
+        this.toast.showToast('Order placed successfully!', 'success');
       },
       error: (err) => {
         console.error('Failed to place the order:', err);
