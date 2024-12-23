@@ -32,13 +32,13 @@ export class LayoutComponent implements OnInit {
 
   }
 
-  getAllCakes() {
-    this.cakeService.getCakes().subscribe((cakes) => {
-      this.cakes = cakes;
-      this.filteredCakes = cakes; // Initialize filtered cakes
-      this.cakesComponent.filteredCakes = this.cakes; // Pass initial cakes
-    });
-  }
+  // getAllCakes() {
+  //   this.cakeService.getCakes().subscribe((cakes) => {
+  //     this.cakes = cakes;
+  //     this.filteredCakes = cakes; // Initialize filtered cakes
+  //     this.cakesComponent.filteredCakes = this.cakes; // Pass initial cakes
+  //   });
+  // }
 
   onSearchTermChanged(searchTerm: string) {
     this.searchTerm = searchTerm;

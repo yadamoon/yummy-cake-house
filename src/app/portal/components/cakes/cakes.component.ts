@@ -51,7 +51,7 @@ export class CakesComponent implements OnInit {
     this.productService.getAllProducts().subscribe((products) => {
       this.cakes = products.map(product => ({
         ...product,
-        id: product.id ?? 0,
+        id: product._id ?? "",
         imageUrl: product.image || '',
         quantity: 0,
         size: product.size.toString()
