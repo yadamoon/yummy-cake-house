@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-toast',
@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
 export class ToastComponent {
   toasts: { message: string; type: 'info' | 'success' | 'error' }[] = [];
 
-  showToast(message: string, type: 'info' | 'success' | 'error', duration: number = 3000) {
+  showToast(message: string, type: 'info' | 'success' | 'error', duration: number = 2000) {
     const toast = { message, type };
     this.toasts.push(toast);
 
