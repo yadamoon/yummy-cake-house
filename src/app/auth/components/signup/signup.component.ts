@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { routes } from './../../../app.routes';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { User } from '../model/user.modal';
+import { ToastComponent } from '../../../shard/components/toast/toast.component';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
 
   templateUrl: './signup.component.html',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule]
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, ToastComponent]
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
@@ -19,7 +22,10 @@ export class SignupComponent implements OnInit {
   showConfirmPassword = false;
   userType: 'customer' | 'agent' = 'customer';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  @ViewChild(ToastComponent) toast!: ToastComponent;
+
+
+  constructor(private fb: FormBuilder, private authService: AuthService, private routes: Router) {
     this.signupForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
@@ -62,11 +68,15 @@ export class SignupComponent implements OnInit {
       };
       this.authService.register(user).subscribe(
         (response) => {
-          console.log('Registration successful:', response);
+          this.toast.showToast('Registration successful!', 'success');
+          setTimeout(() => {
+            this.routes.navigate(['/signin']);
+          }, 2000);
           this.isLoading = false;
         },
         (error) => {
-          console.error('Registration failed:', error);
+
+          this.toast.showToast('Registration failed!', 'error');
           this.isLoading = false;
         }
       );

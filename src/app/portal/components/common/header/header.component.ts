@@ -108,13 +108,13 @@ export class HeaderComponent implements OnInit {
     this.orderService.placeOrder(order).subscribe({
       next: () => {
 
-        alert('Order placed successfully!');
+
         this.store.dispatch(clearCart()); // Clear the cart after success
         this.toast.showToast('Order placed successfully!', 'success');
       },
       error: (err) => {
-        console.error('Failed to place the order:', err);
-        alert('An error occurred while placing the order. Please try again.');
+        this.toast.showToast('An error occurred while placing the order. Please try again.', 'error');
+
       },
     });
     // this.orderService.placeOrder(order).subscribe(order => {

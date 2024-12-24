@@ -11,11 +11,12 @@ import { MapComponent } from '../map/map.component';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../../../store/reducers/auth.reducer';
 import { Router, RouterModule } from '@angular/router';
+import { ToastComponent } from '../../../shard/components/toast/toast.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, RouterModule, BannerComponent, HomeComponent, MapComponent, SearchComponent, CakesComponent],
+  imports: [HeaderComponent, FooterComponent, RouterModule, BannerComponent, HomeComponent, MapComponent, SearchComponent, CakesComponent, ToastComponent],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
@@ -24,12 +25,28 @@ export class LayoutComponent implements OnInit {
   filteredCakes: Cake[] = [];
   searchTerm: string = "";
   @ViewChild(CakesComponent) cakesComponent!: CakesComponent;
+  @ViewChild(ToastComponent) toast!: ToastComponent;
 
-  constructor(private cakeService: CakeService, private store: Store<{ auth: AuthState }>, private router: Router) { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    // this.getAllCakes();
+  ngOnInit() {
+    // Check for toast message in navigation state
+    console.log("inside layout component");
+    // this.toast.showToast('Login successful!', 'success');
 
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras.state as { toastMessage?: string; toastType?: 'success' | 'error' };
+
+    if (state?.toastMessage) {
+      this.toast.showToast(state.toastMessage, state.toastType || 'info');
+    }
+
+  }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    this.toast.showToast('Welcome!', 'success');
   }
 
   // getAllCakes() {

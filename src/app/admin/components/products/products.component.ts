@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../../service/products/product.service';
 import { Product } from '../../../portal/model/product.model';
 import { CommonModule } from '@angular/common';
+import { ToastComponent } from '../../../shard/components/toast/toast.component';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ProductsComponent implements OnInit {
 
   isModalOpen: boolean = false;
   selectedImage: string = '';
-
+  @ViewChild(ToastComponent) toast!: ToastComponent;
   constructor(private fb: FormBuilder, private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -69,6 +70,9 @@ export class ProductsComponent implements OnInit {
       this.productService.addCake(product).subscribe(() => {
         console.log("inside addOrUpdateProduct", product)
         this.loadProducts();
+        setTimeout(() => {
+          this.toast.showToast('Product added successfully', 'success');
+        }, 200);
         this.resetForm();
       });
     }
@@ -84,6 +88,9 @@ export class ProductsComponent implements OnInit {
   deleteProduct(id: string): void {
     this.productService.deleteProduct(id).subscribe(() => {
       this.loadProducts();
+      setTimeout(() => {
+        this.toast.showToast('Product deleted successfully', 'success');
+      }, 200);
     });
   }
 
