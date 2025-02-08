@@ -129,5 +129,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout(); // Logout user
+    console.log('inside logout');
   }
 }
